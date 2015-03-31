@@ -21,7 +21,7 @@ public class settings extends ActionBarActivity {
         setContentView(R.layout.activity_settings);
         //adding listeners
         deleteButtonListener();
-        addConstantListener();
+        addTheGodDamnListener();
     }
 
     private void deleteButtonListener(){
@@ -60,29 +60,53 @@ public class settings extends ActionBarActivity {
             }
         });
     }
-
-    private void addConstantListener(){
-        /*
-        TODO: setja í loopu ef hægt
-         */
-        Button button;
-
+    private void addTheGodDamnListener(){
         int [] buttons = {R.id.addtoOnebutton,R.id.addtoTwobutton,
                 R.id.addToThreebutton,R.id.addToFourButton,
                 R.id.addToFiveButton,R.id.addToSixButton};
-        final int [] texts = {R.id.addToOne, R.id.addToTwo,
+        int [] texts = {R.id.addToOne, R.id.addToTwo,
                 R.id.addToThree,R.id.addToFour,
                 R.id.addToFive,R.id.addToSix};
-        //add to number 1
-        for(int i = 0; i< buttons.length; i++){
+        for(int i = 0; i < buttons.length; i++){
+            String number = "";
+            switch (i){
+                case 0:
+                    number = "1";
+                    break;
+                case 1:
+                    number = "2";
+                    break;
+                case 2:
+                    number = "3";
+                    break;
+                case 3:
+                    number = "4";
+                    break;
+                case 4:
+                    number = "5";
+                    break;
+                case 5:
+                    number = "6";
+                    break;
+            }
+            EditText ed = (EditText)findViewById(texts[i]);
+            Button button = (Button)findViewById(buttons[i]);
+            addConstantListener(button, ed, i, number);
+        }
+    }
 
-            button = (Button)findViewById(buttons[i]);
+    private void addConstantListener(final Button button, final EditText ed, final int i, final String number){
+        /*
+        TODO: setja í loopu ef hægt
+         */
+
+        //add to number 1
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditText ed;
-                    ed = (EditText)findViewById(texts[i]);
                     String text = ed.getText().toString();
+                    System.out.println(text);
+                    System.out.println("tomur");
                     if(text.equals("")){
                         new AlertDialog.Builder(settings.this)
                                 .setMessage("cannot be empty").setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener() {
@@ -92,12 +116,12 @@ public class settings extends ActionBarActivity {
                             }
                         }).show();
                     }else{
-                        dbFunc.insertOneConstant(text, "1");
+                        dbFunc.insertOneConstant(text, number);
                         ed.setText("");
                     }
                 }
             });
-        }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
