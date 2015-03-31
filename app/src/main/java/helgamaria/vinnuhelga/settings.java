@@ -105,8 +105,6 @@ public class settings extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     String text = ed.getText().toString();
-                    System.out.println(text);
-                    System.out.println("tomur");
                     if(text.equals("")){
                         new AlertDialog.Builder(settings.this)
                                 .setMessage("cannot be empty").setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener() {
