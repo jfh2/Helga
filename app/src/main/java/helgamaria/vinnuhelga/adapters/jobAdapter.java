@@ -20,30 +20,34 @@ public class jobAdapter extends ArrayAdapter<JobObject> {
     private Context context;
     private List<JobObject> job = null;
 
+
     public jobAdapter(Context context, List<JobObject> job){
         super(context, R.layout.listview_item_row, job);
         this.context = context;
         this.job = job;
     }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View rowView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         /*
         TODO: setja takka til að eyða og útfæra eyða gaur í dbfunctions
          */
-        View rowView = inflater.inflate(R.layout.listview_item_row,parent, false);
-        //initialize the fields
-        TextView date = (TextView)rowView.findViewById(R.id.dateField);
-        TextView name = (TextView)rowView.findViewById(R.id.nameField);
-        TextView type = (TextView)rowView.findViewById(R.id.typeField);
-        TextView start = (TextView)rowView.findViewById(R.id.startField);
-        TextView stop = (TextView)rowView.findViewById(R.id.stopField);
-        //insert variables
-        date.setText(job.get(position).getDate());
-        name.setText(job.get(position).getJobName());
-        type.setText(job.get(position).getJobType());
-        stop.setText(job.get(position).getStopTime());
-        start.setText(job.get(position).getStartTime());
+        if(rowView == null){
+            rowView = inflater.inflate(R.layout.listview_item_row,parent, false);
+            //initialize the fields
+            TextView date = (TextView)rowView.findViewById(R.id.dateField);
+            TextView name = (TextView)rowView.findViewById(R.id.nameField);
+            TextView type = (TextView)rowView.findViewById(R.id.typeField);
+            TextView start = (TextView)rowView.findViewById(R.id.startField);
+            TextView stop = (TextView)rowView.findViewById(R.id.stopField);
+            //insert variables
+            date.setText(job.get(position).getDate());
+            name.setText(job.get(position).getJobName());
+            type.setText(job.get(position).getJobType());
+            stop.setText(job.get(position).getStopTime());
+            start.setText(job.get(position).getStartTime());
+        }
+
         return rowView;
     }
 }
