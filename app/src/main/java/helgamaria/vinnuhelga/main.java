@@ -48,6 +48,7 @@ public class main extends ActionBarActivity {
         lv4 = (ListView)findViewById(R.id.fjorda);
         lv5 = (ListView)findViewById(R.id.fimmta);
         lv6 = (ListView)findViewById(R.id.sjotta);
+        //changin backround colors to each one of them
         lv1.setBackgroundColor(Color.parseColor("#FFFFFF"));
         lv2.setBackgroundColor(Color.parseColor("#FFFFFF"));
         lv3.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -130,6 +131,221 @@ public class main extends ActionBarActivity {
                     obj.setDate(null);
                     obj.setStartTime(null);
                     obj.setJobType("1");
+                    obj.setJobName(name);
+                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    obj.on();
+                }else{
+                    //hér ef það er on setjum það off
+                    obj.setStopTime(null);
+                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    obj.saveToDb(getApplicationContext());
+                }
+            }
+        });
+        //for first listview
+        /*
+        TODO: setja í loopu fyrir alla ef hægt
+         */
+        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JobObject obj = null;
+                if(joblist2.size() == 0){
+                    obj = new JobObject();
+                    obj.setId(position);
+                    joblist2.add(obj);
+                }else{
+                    for(int i = 0; i < joblist2.size(); i++){
+                        //athuga hvort það sé object með id = position
+                        if(joblist2.get(i).getId() == position){
+                            obj = joblist2.get(i);
+                            break;
+                        }
+                    }
+                    if(obj == null){
+                        obj = new JobObject();
+                        obj.setId(position);
+                        joblist2.add(obj);
+                    }
+                }
+                if(!obj.isItOn()){
+                    String name = lv2.getItemAtPosition(position).toString();
+                    //hér ef það er off, setjum það on
+                    obj.setDate(null);
+                    obj.setStartTime(null);
+                    obj.setJobType("2");
+                    obj.setJobName(name);
+                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    obj.on();
+                }else{
+                    //hér ef það er on setjum það off
+                    obj.setStopTime(null);
+                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    obj.saveToDb(getApplicationContext());
+                }
+            }
+        });
+        //for first listview
+        /*
+        TODO: setja í loopu fyrir alla ef hægt
+         */
+        lv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JobObject obj = null;
+                if(joblist3.size() == 0){
+                    obj = new JobObject();
+                    obj.setId(position);
+                    joblist3.add(obj);
+                }else{
+                    for(int i = 0; i < joblist3.size(); i++){
+                        //athuga hvort það sé object með id = position
+                        if(joblist3.get(i).getId() == position){
+                            obj = joblist3.get(i);
+                            break;
+                        }
+                    }
+                    if(obj == null){
+                        obj = new JobObject();
+                        obj.setId(position);
+                        joblist3.add(obj);
+                    }
+                }
+                if(!obj.isItOn()){
+                    String name = lv3.getItemAtPosition(position).toString();
+                    //hér ef það er off, setjum það on
+                    obj.setDate(null);
+                    obj.setStartTime(null);
+                    obj.setJobType("3");
+                    obj.setJobName(name);
+                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    obj.on();
+                }else{
+                    //hér ef það er on setjum það off
+                    obj.setStopTime(null);
+                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    obj.saveToDb(getApplicationContext());
+                }
+            }
+        });
+        //for first listview
+        /*
+        TODO: setja í loopu fyrir alla ef hægt
+         */
+        lv4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JobObject obj = null;
+                if(joblist4.size() == 0){
+                    obj = new JobObject();
+                    obj.setId(position);
+                    joblist4.add(obj);
+                }else{
+                    for(int i = 0; i < joblist4.size(); i++){
+                        //athuga hvort það sé object með id = position
+                        if(joblist4.get(i).getId() == position){
+                            obj = joblist4.get(i);
+                            break;
+                        }
+                    }
+                    if(obj == null){
+                        obj = new JobObject();
+                        obj.setId(position);
+                        joblist4.add(obj);
+                    }
+                }
+                if(!obj.isItOn()){
+                    String name = lv4.getItemAtPosition(position).toString();
+                    //hér ef það er off, setjum það on
+                    obj.setDate(null);
+                    obj.setStartTime(null);
+                    obj.setJobType("4");
+                    obj.setJobName(name);
+                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    obj.on();
+                }else{
+                    //hér ef það er on setjum það off
+                    obj.setStopTime(null);
+                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    obj.saveToDb(getApplicationContext());
+                }
+            }
+        });
+        //for first listview
+        /*
+        TODO: setja í loopu fyrir alla ef hægt
+         */
+        lv5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JobObject obj = null;
+                if(joblist5.size() == 0){
+                    obj = new JobObject();
+                    obj.setId(position);
+                    joblist5.add(obj);
+                }else{
+                    for(int i = 0; i < joblist5.size(); i++){
+                        //athuga hvort það sé object með id = position
+                        if(joblist5.get(i).getId() == position){
+                            obj = joblist5.get(i);
+                            break;
+                        }
+                    }
+                    if(obj == null){
+                        obj = new JobObject();
+                        obj.setId(position);
+                        joblist5.add(obj);
+                    }
+                }
+                if(!obj.isItOn()){
+                    String name = lv5.getItemAtPosition(position).toString();
+                    //hér ef það er off, setjum það on
+                    obj.setDate(null);
+                    obj.setStartTime(null);
+                    obj.setJobType("5");
+                    obj.setJobName(name);
+                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    obj.on();
+                }else{
+                    //hér ef það er on setjum það off
+                    obj.setStopTime(null);
+                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    obj.saveToDb(getApplicationContext());
+                }
+            }
+        });
+        //for first listview
+        /*
+        TODO: setja í loopu fyrir alla ef hægt
+         */
+        lv6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                JobObject obj = null;
+                if(joblist6.size() == 0){
+                    obj = new JobObject();
+                    obj.setId(position);
+                    joblist6.add(obj);
+                }else{
+                    for(int i = 0; i < joblist6.size(); i++){
+                        //athuga hvort það sé object með id = position
+                        if(joblist6.get(i).getId() == position){
+                            obj = joblist6.get(i);
+                            break;
+                        }
+                    }
+                    if(obj == null){
+                        obj = new JobObject();
+                        obj.setId(position);
+                        joblist6.add(obj);
+                    }
+                }
+                if(!obj.isItOn()){
+                    String name = lv6.getItemAtPosition(position).toString();
+                    //hér ef það er off, setjum það on
+                    obj.setDate(null);
+                    obj.setStartTime(null);
+                    obj.setJobType("6");
                     obj.setJobName(name);
                     view.setBackgroundColor(Color.parseColor("#00FF00"));
                     obj.on();
