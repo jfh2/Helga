@@ -2,8 +2,11 @@ package helgamaria.vinnuhelga;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +20,20 @@ public class settings extends ActionBarActivity {
     dbFunctions dbFunc = new dbFunctions(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            ActivityInfo[] list = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES).activities;
+
+            for(int i = 0;i< list.length;i++)
+            {
+                System.out.println("List of running activities"+list[i].name);
+
+            }
+        }
+
+        catch (PackageManager.NameNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         //adding listeners
@@ -141,5 +158,14 @@ public class settings extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
