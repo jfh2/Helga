@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +38,17 @@ public class overview extends ActionBarActivity {
         lv = (ListView)findViewById(R.id.listView);
         jobAdapter adapt = new jobAdapter(this, listOfJobsDb);
         lv.setAdapter(adapt);
-    }
 
+        Button butt = (Button)findViewById(R.id.excel);
+        butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCSVFile.save(getApplicationContext());
+                Toast.makeText(getApplicationContext(), "geggjað", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

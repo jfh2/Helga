@@ -210,7 +210,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Delete all jobs from database"
+            android:text="Delete all constants from database"
             android:id="@+id/deleteAllConstants"
             android:layout_column="1" />
 

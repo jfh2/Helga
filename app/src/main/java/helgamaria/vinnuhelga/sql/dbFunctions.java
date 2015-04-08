@@ -86,8 +86,8 @@ public class dbFunctions {
         job.setDate(cursor.getString(1));
         job.setJobName(cursor.getString(2));
         job.setJobType(cursor.getString(5));
-        job.setStartTime(cursor.getString(4));
-        job.setStopTime(cursor.getString(3));
+        job.setStartTime(cursor.getString(3));
+        job.setStopTime(cursor.getString(4));
         return job;
     }
     /*

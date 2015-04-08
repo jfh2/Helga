@@ -3,7 +3,10 @@ package helgamaria.vinnuhelga;
 import helgamaria.vinnuhelga.sql.JobObject;
 import helgamaria.vinnuhelga.sql.dbFunctions;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.PowerManager;
 import android.view.View.OnClickListener;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class main extends ActionBarActivity {
+    PowerManager pm;
+    PowerManager.WakeLock wl;
     dbFunctions dbFunc = new dbFunctions(this);
     private ListView lv1,lv2,lv3,lv4,lv5,lv6;
     //lists with jobobjects
@@ -41,6 +46,9 @@ public class main extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pm = (PowerManager) getSystemService(this.POWER_SERVICE);
+        wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "myTag");
+        wl.acquire();
         //finding the listviews
         lv1 = (ListView)findViewById(R.id.fyrsta);
         lv2 = (ListView)findViewById(R.id.annad);
@@ -149,6 +157,7 @@ public class main extends ActionBarActivity {
         lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 JobObject obj = null;
                 if(joblist2.size() == 0){
                     obj = new JobObject();
@@ -378,15 +387,51 @@ public class main extends ActionBarActivity {
             /*
             TODO: add alert to say that all existing jobs will be discarded
              */
-            Intent intent = new Intent(this, settings.class);
-            startActivity(intent);
+            new AlertDialog.Builder(this)
+                    .setTitle("Are you sure?")
+                    .setMessage("All running jobs will be lost")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(wl.isHeld()){
+                                wl.release();
+                            }
+                            Intent intent = new Intent(getApplicationContext(), settings.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
         }
         if(id == R.id.action_overview){
             /*
             TODO: add alert to say that all existing jobs will be discarded
              */
-            Intent intent = new Intent(this, overview.class);
-            startActivity(intent);
+            new AlertDialog.Builder(this)
+                    .setTitle("Are you sure?")
+                    .setMessage("All running jobs will be lost")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(wl.isHeld()){
+                                wl.release();
+                            }
+                            Intent intent = new Intent(getApplicationContext(), overview.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
         }
         return super.onOptionsItemSelected(item);
     }
