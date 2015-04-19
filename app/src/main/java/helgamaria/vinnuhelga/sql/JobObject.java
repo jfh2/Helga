@@ -31,7 +31,7 @@ public class JobObject {
     public void initJobObj(){
         this.date = null;
         this.job_name = null;
-        this.startTime = null;  
+        this.startTime = null;
         this.stopTime = null;
         this.job_type = null;
         this.isactive = false;

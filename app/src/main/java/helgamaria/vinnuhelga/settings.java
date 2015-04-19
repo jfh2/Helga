@@ -2,6 +2,7 @@ package helgamaria.vinnuhelga;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
@@ -151,8 +152,13 @@ public class settings extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_overview) {
+            Intent intent = new Intent(getApplicationContext(), overview.class);
+            startActivity(intent);
+        }
+        if(id == R.id.action_home){
+            Intent intent = new Intent(getApplicationContext(), main.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

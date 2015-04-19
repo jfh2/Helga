@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.PowerManager;
+import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
@@ -49,6 +50,9 @@ public class main extends ActionBarActivity {
         pm = (PowerManager) getSystemService(this.POWER_SERVICE);
         wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "myTag");
         wl.acquire();
+
+        LayoutInflater inflater = getLayoutInflater();
+
         //finding the listviews
         lv1 = (ListView)findViewById(R.id.fyrsta);
         lv2 = (ListView)findViewById(R.id.annad);
@@ -63,6 +67,20 @@ public class main extends ActionBarActivity {
         lv4.setBackgroundColor(Color.parseColor("#FFFFFF"));
         lv5.setBackgroundColor(Color.parseColor("#FFFFFF"));
         lv6.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+        //add headerst to listview items
+        View header = getLayoutInflater().inflate(R.layout.header, null);
+        View header2 = getLayoutInflater().inflate(R.layout.header2, null);
+        View header3 = getLayoutInflater().inflate(R.layout.header3, null);
+        View header4 = getLayoutInflater().inflate(R.layout.header4, null);
+        View header5 = getLayoutInflater().inflate(R.layout.header5, null);
+        View header6 = getLayoutInflater().inflate(R.layout.header6, null);
+        lv1.addHeaderView(header);
+        lv2.addHeaderView(header2);
+        lv3.addHeaderView(header3);
+        lv4.addHeaderView(header4);
+        lv5.addHeaderView(header5);
+        lv6.addHeaderView(header6);
         //creating the adapters
         ArrayAdapter<String> ad1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list1);
         ArrayAdapter<String> ad2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list2);
@@ -108,9 +126,7 @@ public class main extends ActionBarActivity {
     }
     private void setListeners(){
         //for first listview
-        /*
-        TODO: setja í loopu fyrir alla ef hægt
-         */
+
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -150,10 +166,7 @@ public class main extends ActionBarActivity {
                 }
             }
         });
-        //for first listview
-        /*
-        TODO: setja í loopu fyrir alla ef hægt
-         */
+        //secont listview
         lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -194,10 +207,7 @@ public class main extends ActionBarActivity {
                 }
             }
         });
-        //for first listview
-        /*
-        TODO: setja í loopu fyrir alla ef hægt
-         */
+        //third listview
         lv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -237,10 +247,7 @@ public class main extends ActionBarActivity {
                 }
             }
         });
-        //for first listview
-        /*
-        TODO: setja í loopu fyrir alla ef hægt
-         */
+        //forth listview
         lv4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -280,10 +287,7 @@ public class main extends ActionBarActivity {
                 }
             }
         });
-        //for first listview
-        /*
-        TODO: setja í loopu fyrir alla ef hægt
-         */
+        //fifth listview
         lv5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -323,10 +327,7 @@ public class main extends ActionBarActivity {
                 }
             }
         });
-        //for first listview
-        /*
-        TODO: setja í loopu fyrir alla ef hægt
-         */
+        //sixth listview
         lv6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -384,9 +385,6 @@ public class main extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            /*
-            TODO: add alert to say that all existing jobs will be discarded
-             */
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure?")
                     .setMessage("All running jobs will be lost")
@@ -409,9 +407,6 @@ public class main extends ActionBarActivity {
 
         }
         if(id == R.id.action_overview){
-            /*
-            TODO: add alert to say that all existing jobs will be discarded
-             */
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure?")
                     .setMessage("All running jobs will be lost")

@@ -3,6 +3,8 @@ package helgamaria.vinnuhelga;
 import helgamaria.vinnuhelga.adapters.jobAdapter;
 import helgamaria.vinnuhelga.sql.JobObject;
 import helgamaria.vinnuhelga.sql.dbFunctions;
+
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -43,8 +45,13 @@ public class overview extends ActionBarActivity {
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeCSVFile.save(getApplicationContext());
-                Toast.makeText(getApplicationContext(), "geggjað", Toast.LENGTH_LONG).show();
+                try{
+
+                    makeCSVFile.save(getApplicationContext());
+                    Toast.makeText(getApplicationContext(), ".txt file saved to device.", Toast.LENGTH_LONG).show();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Saving failed, please try again.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -66,7 +73,12 @@ public class overview extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(getApplicationContext(), settings.class);
+            startActivity(intent);
+        }
+        if(id == R.id.action_home){
+            Intent intent = new Intent(getApplicationContext(), main.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

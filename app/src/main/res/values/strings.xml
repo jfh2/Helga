@@ -11,7 +11,8 @@
     <string name="fimm">5</string>
     <string name="sex">6</string>
     <string name="title_activity_overview">overview</string>
-    <string name="title_activity_test">test</string>
+    <string name="title_activity_home">home</string>
     <string name="title_activity_settings">settings</string>
+
 
 </resources>

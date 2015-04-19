@@ -15,18 +15,20 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fyrsta"
-            android:layout_weight="1" />
+            android:id="@+id/annad"
+            android:layout_weight="1"
+            android:layout_marginRight="2dp"/>
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/annad"
-            android:layout_weight="1" />
+            android:id="@+id/fjorda"
+            android:layout_weight="1"
+            android:layout_marginRight="2dp"/>
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tridja"
+            android:id="@+id/sjotta"
             android:layout_weight="1" />
     </TableRow>
     <TableRow
@@ -37,18 +39,20 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fjorda"
-            android:layout_weight="1" />
+            android:id="@+id/fyrsta"
+            android:layout_weight="1"
+            android:layout_marginRight="2dp"/>
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fimmta"
-            android:layout_weight="1" />
+            android:id="@+id/tridja"
+            android:layout_weight="1"
+            android:layout_marginRight="2dp"/>
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sjotta"
+            android:id="@+id/fimmta"
             android:layout_weight="1" />
     </TableRow>
 </TableLayout>
