@@ -42,16 +42,17 @@ public class main extends ActionBarActivity {
     List<String> list4 = new ArrayList<String>();
     List<String> list5 = new ArrayList<String>();
     List<String> list6 = new ArrayList<String>();
-
+    final String colorgreen = "#00FF00";
+    final String colorwhite = "#FFFFFF";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pm = (PowerManager) getSystemService(this.POWER_SERVICE);
         wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "myTag");
         wl.acquire();
 
-        LayoutInflater inflater = getLayoutInflater();
 
         //finding the listviews
         lv1 = (ListView)findViewById(R.id.fyrsta);
@@ -61,12 +62,12 @@ public class main extends ActionBarActivity {
         lv5 = (ListView)findViewById(R.id.fimmta);
         lv6 = (ListView)findViewById(R.id.sjotta);
         //changin backround colors to each one of them
-        lv1.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        lv2.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        lv3.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        lv4.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        lv5.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        lv6.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        lv1.setBackgroundColor(Color.parseColor(colorwhite));
+        lv2.setBackgroundColor(Color.parseColor(colorwhite));
+        lv3.setBackgroundColor(Color.parseColor(colorwhite));
+        lv4.setBackgroundColor(Color.parseColor(colorwhite));
+        lv5.setBackgroundColor(Color.parseColor(colorwhite));
+        lv6.setBackgroundColor(Color.parseColor(colorwhite));
 
         //add headerst to listview items
         View header = getLayoutInflater().inflate(R.layout.header, null);
@@ -75,12 +76,12 @@ public class main extends ActionBarActivity {
         View header4 = getLayoutInflater().inflate(R.layout.header4, null);
         View header5 = getLayoutInflater().inflate(R.layout.header5, null);
         View header6 = getLayoutInflater().inflate(R.layout.header6, null);
-        lv1.addHeaderView(header);
-        lv2.addHeaderView(header2);
-        lv3.addHeaderView(header3);
-        lv4.addHeaderView(header4);
-        lv5.addHeaderView(header5);
-        lv6.addHeaderView(header6);
+        lv1.addHeaderView(header,"", false);
+        lv2.addHeaderView(header2,"", false);
+        lv3.addHeaderView(header3,"", false);
+        lv4.addHeaderView(header4,"", false);
+        lv5.addHeaderView(header5,"", false);
+        lv6.addHeaderView(header6,"", false);
         //creating the adapters
         ArrayAdapter<String> ad1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list1);
         ArrayAdapter<String> ad2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list2);
@@ -95,6 +96,7 @@ public class main extends ActionBarActivity {
         lv4.setAdapter(ad4);
         lv5.setAdapter(ad5);
         lv6.setAdapter(ad6);
+
         prepareJobLists();
         setListeners();
     }
@@ -156,12 +158,12 @@ public class main extends ActionBarActivity {
                     obj.setStartTime(null);
                     obj.setJobType("1");
                     obj.setJobName(name);
-                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    view.setBackgroundColor(Color.parseColor(colorgreen));
                     obj.on();
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
             }
@@ -197,12 +199,12 @@ public class main extends ActionBarActivity {
                     obj.setStartTime(null);
                     obj.setJobType("2");
                     obj.setJobName(name);
-                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    view.setBackgroundColor(Color.parseColor(colorgreen));
                     obj.on();
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
             }
@@ -237,12 +239,12 @@ public class main extends ActionBarActivity {
                     obj.setStartTime(null);
                     obj.setJobType("3");
                     obj.setJobName(name);
-                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    view.setBackgroundColor(Color.parseColor(colorgreen));
                     obj.on();
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
             }
@@ -277,12 +279,12 @@ public class main extends ActionBarActivity {
                     obj.setStartTime(null);
                     obj.setJobType("4");
                     obj.setJobName(name);
-                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    view.setBackgroundColor(Color.parseColor(colorgreen));
                     obj.on();
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
             }
@@ -317,12 +319,12 @@ public class main extends ActionBarActivity {
                     obj.setStartTime(null);
                     obj.setJobType("5");
                     obj.setJobName(name);
-                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    view.setBackgroundColor(Color.parseColor(colorgreen));
                     obj.on();
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
             }
@@ -357,12 +359,12 @@ public class main extends ActionBarActivity {
                     obj.setStartTime(null);
                     obj.setJobType("6");
                     obj.setJobName(name);
-                    view.setBackgroundColor(Color.parseColor("#00FF00"));
+                    view.setBackgroundColor(Color.parseColor(colorgreen));
                     obj.on();
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
             }

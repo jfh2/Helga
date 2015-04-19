@@ -43,7 +43,7 @@ public class makeCSVFile {
             FileOutputStream f = new FileOutputStream(file);
             PrintWriter pw = new PrintWriter(f);
             String line = "";
-            pw.print("DATE,NAME,TYPE,STARTTIME,STOPTIME,TIME\r\n");
+            pw.print("DATE,NAME,TYPE,STARTTIME,STOPTIME,TIME(in seconds)\r\n");
             for(int i = 0; i < listOfJobsDb.size();i++){
                 DateFormat form = new SimpleDateFormat("hh:mm:ss");
                 try{

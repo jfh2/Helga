@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import helgamaria.vinnuhelga.sql.dbFunctions;
 
 public class settings extends ActionBarActivity {
@@ -46,10 +48,15 @@ public class settings extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(settings.this)
-                        .setMessage("Are you sure you want to ereas all jobs?")
+                        .setMessage("Are you sure you want to delete all jobs?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which){
-                                dbFunc.deleteAllJobs();
+                                try{
+                                    dbFunc.deleteAllJobs();
+                                    Toast.makeText(getApplicationContext(), "All jobs deleted successfully", Toast.LENGTH_LONG).show();
+                                }catch(Exception e){
+                                    Toast.makeText(getApplicationContext(), "Failed to delete, please try again", Toast.LENGTH_LONG).show();
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
@@ -63,10 +70,15 @@ public class settings extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(settings.this)
-                        .setMessage("Are you sure you want to ereas all defined names?")
+                        .setMessage("Are you sure you want to delete all defined job names?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which){
-                                dbFunc.deleteAllConstants();
+                                try{
+                                    dbFunc.deleteAllConstants();
+                                    Toast.makeText(getApplicationContext(), "All defined job names deleted successfully", Toast.LENGTH_LONG).show();
+                                }catch(Exception e){
+                                    Toast.makeText(getApplicationContext(), "Failed to delete, please try again", Toast.LENGTH_LONG).show();
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
