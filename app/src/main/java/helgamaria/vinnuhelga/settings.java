@@ -21,20 +21,7 @@ public class settings extends ActionBarActivity {
     dbFunctions dbFunc = new dbFunctions(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            ActivityInfo[] list = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES).activities;
 
-            for(int i = 0;i< list.length;i++)
-            {
-                System.out.println("List of running activities"+list[i].name);
-
-            }
-        }
-
-        catch (PackageManager.NameNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         //adding listeners
