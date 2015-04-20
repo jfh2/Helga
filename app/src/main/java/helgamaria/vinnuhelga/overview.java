@@ -29,14 +29,16 @@ public class overview extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
-        /*
-        TODO: búa til custom listitem sem inniheldur eyða færslu takka(fegra dótið líka)
-         */
+
         //fetching the data from database to my string list
         dbFunc.open();
         List<JobObject> listOfJobsDb = dbFunc.selectAllJobs();
         dbFunc.close();
-
+        System.out.println("listofjobs i overview");
+        for(int i = 0; i < listOfJobsDb.size(); i++){
+            System.out.println(listOfJobsDb.get(i).getJobType());
+        }
+        System.out.println("listofjobs i overview lokið");
         lv = (ListView)findViewById(R.id.listView);
         jobAdapter adapt = new jobAdapter(this, listOfJobsDb);
         lv.setAdapter(adapt);

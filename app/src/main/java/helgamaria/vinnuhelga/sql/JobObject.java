@@ -106,10 +106,10 @@ public class JobObject {
 
     //save job to db
     public void saveToDb(Context context){
+
         if((this.job_name == null|| this.job_type == null)||
            (this.startTime == null || this.stopTime == null)){
 
-            System.out.println("bitch please1");
         }else{
             dbFunctions dbfunc = new dbFunctions(context);
             dbfunc.open();

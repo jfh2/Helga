@@ -105,11 +105,11 @@ public class main extends ActionBarActivity {
         List<String> templist;
 
         if(initlist.size() == 0) return;
-        System.out.println(initlist.size());
         for(int i = 0; i < initlist.size(); i++){
             templist = initlist.get(i);
             String decide = templist.get(1);
             String value = templist.get(0);
+
             if(decide.equals("1")){
                 list1.add(value);
             }else if(decide.equals("2")){
@@ -432,6 +432,7 @@ public class main extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onRestart()
     {
