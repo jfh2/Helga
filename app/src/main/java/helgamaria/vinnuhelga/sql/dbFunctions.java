@@ -39,7 +39,13 @@ public class dbFunctions {
                           String start_time,
                           String stop_time,
                           String job_type){
-
+        System.out.println("úr dbfunc");
+        System.out.println(date);
+        System.out.println(job_name);
+        System.out.println(start_time);
+        System.out.println(stop_time);
+        System.out.println(job_type);
+        System.out.println("úr dbfunc lokið");
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_DATE, date);
         values.put(MySQLiteHelper.COLUMN_JOB_NAME, job_name);
@@ -88,6 +94,7 @@ public class dbFunctions {
         job.setJobType(cursor.getString(5));
         job.setStartTime(cursor.getString(3));
         job.setStopTime(cursor.getString(4));
+
         return job;
     }
     /*
