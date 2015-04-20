@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/role_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/role_name_to_save"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/role_name"
+        />
+
+    <Button
+        android:id="@+id/roleDialogOk"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:text=" Ok "
+        android:layout_marginRight="299dp"
+        android:layout_marginEnd="299dp"
+        android:layout_below="@+id/role_name_to_save"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="57dp" />
+    <Button
+        android:id="@+id/roleDialogCancel"
+        android:layout_width="100px"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_below="@+id/role_name_to_save"
+        android:layout_alignTop="@+id/roleDialogOk"
+        android:layout_toLeftOf="@+id/roleDialogOk"
+        android:layout_toStartOf="@+id/roleDialogOk" />
+
+</RelativeLayout>

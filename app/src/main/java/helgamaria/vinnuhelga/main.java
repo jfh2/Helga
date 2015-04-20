@@ -99,6 +99,19 @@ public class main extends ActionBarActivity {
 
         prepareJobLists();
         setListeners();
+        setLongclickListeners();
+    }
+    private void setLongclickListeners(){
+        lv1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+                String str= lv1.getItemAtPosition(index).toString();
+                dbFunc.deleteOneConstant(str, "");
+                recreate();
+                return true;
+            }
+        });
     }
     private void prepareJobLists(){
         List<List<String>> initlist = dbFunc.selectAllConstants();
@@ -163,6 +176,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
+                    obj.setRole_name("doctor");
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -204,6 +218,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
+                    obj.setRole_name("doctor");
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -244,6 +259,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
+                    obj.setRole_name("doctor");
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -284,6 +300,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
+                    obj.setRole_name("doctor");
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -324,6 +341,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
+                    obj.setRole_name("doctor");
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -364,6 +382,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
+                    obj.setRole_name("doctor");
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -432,7 +451,19 @@ public class main extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void recreate()
+    {
+        if (android.os.Build.VERSION.SDK_INT >= 11)
+        {
+            super.recreate();
+        }
+        else
+        {
+            startActivity(getIntent());
+            finish();
+        }
+    }
     @Override
     public void onRestart()
     {

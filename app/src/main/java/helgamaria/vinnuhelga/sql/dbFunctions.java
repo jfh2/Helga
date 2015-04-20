@@ -38,21 +38,18 @@ public class dbFunctions {
                           String job_name,
                           String start_time,
                           String stop_time,
-                          String job_type){
-        System.out.println("úr dbfunc");
-        System.out.println(date);
-        System.out.println(job_name);
-        System.out.println(start_time);
-        System.out.println(stop_time);
-        System.out.println(job_type);
-        System.out.println("úr dbfunc lokið");
+                          String job_type,
+                          String role_name){
+        System.out.println("i db");
+        System.out.println(role_name);
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_DATE, date);
         values.put(MySQLiteHelper.COLUMN_JOB_NAME, job_name);
         values.put(MySQLiteHelper.COLUMN_START, start_time);
         values.put(MySQLiteHelper.COLUMN_STOP, stop_time);
         values.put(MySQLiteHelper.COLUMN_JOB_TYPE, job_type);
-        database.insert(MySQLiteHelper.TABLE_JOB,null, values);
+        values.put(MySQLiteHelper.COLUMN_ROLE_NAME_JOB, role_name);
+        database.insert(MySQLiteHelper.TABLE_JOB, null, values);
         //database.close();
     }
     //count of all instances of jobs in database
@@ -70,9 +67,9 @@ public class dbFunctions {
     //so it can be shown later on screen
     public List<JobObject> selectAllJobs(){
         List<JobObject> allJobs = new ArrayList<JobObject>();
+        Cursor cur;
         //select all columns from database
-        Cursor cur = database.query(MySQLiteHelper.TABLE_JOB,
-                allColums,null,null,null,null,null);
+        cur = database.rawQuery("select * from jobs", null);
         cur.moveToFirst();
         //fetch cursor objects into jobobjects
         while(!cur.isAfterLast()){
@@ -81,7 +78,9 @@ public class dbFunctions {
             cur.moveToNext();
         }
         cur.close();
+
         return allJobs;
+
     }
     //create a jobobject from cursor object
     private JobObject cursorToJob(Cursor cursor){
@@ -91,17 +90,13 @@ public class dbFunctions {
         job.setId(cursor.getInt(0));
         job.setDate(cursor.getString(1));
         job.setJobName(cursor.getString(2));
-        job.setJobType(cursor.getString(5));
-        job.setStartTime(cursor.getString(3));
-        job.setStopTime(cursor.getString(4));
+        job.setJobType(cursor.getString(3));
+        job.setStartTime(cursor.getString(4));
+        job.setStopTime(cursor.getString(5));
+        job.setRole_name(cursor.getString(6));
+
 
         return job;
-    }
-    /*
-    TODO: útfæra eyða einni færslu
-     */
-    public void deleteOneJob(int id){
-        //eyða færslu með gefið id
     }
     /*
     TODO: búa til alert sem spyr hvort þú sér viss
@@ -115,8 +110,10 @@ public class dbFunctions {
     }
     public void deleteAllConstants(){
         open();
-        String query = "delete from constants";
-        database.execSQL(query);
+        String consquery = "delete from constants";
+        String rolequery = "delete from role";
+        database.execSQL(rolequery);
+        database.execSQL(consquery);
         close();
     }
     //methods for constant table
@@ -138,17 +135,30 @@ public class dbFunctions {
         close();
         return lists;
     }
-    public void deleteOneConstant(String constant){
-        open();
-        database.delete(MySQLiteHelper.TABLE_CONSTANTS,"constant = " + constant,null);
-        close();
+    public void deleteOneConstant(String constant, String role_name){
+        try{
+            open();
+            database.delete(MySQLiteHelper.TABLE_CONSTANTS,"constant = \'" + constant +"\'" + " and role_name = "+ "\'doctor\'", null);
+            close();
+        }catch(Exception e){
+            System.out.println("neinei");
+        }
     }
-    public void insertOneConstant(String cons, String constype){
+    public void insertOneConstant(String cons, String constype, String role_name){
         open();
         ContentValues content = new ContentValues();
         content.put("constant", cons);
         content.put("type", constype);
-        database.insert("constants",null, content);
+        content.put("role_name", role_name);
+        database.insert("constants", null, content);
         close();
+    }
+    public void createRole(String role_name){
+        open();
+        ContentValues content = new ContentValues();
+        content.put("name", role_name);
+        database.insert("role",null ,content);
+        close();
+
     }
 }

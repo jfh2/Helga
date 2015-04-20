@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Download as .txt"
-        android:id="@+id/excel" />
+        android:id="@+id/txt" />
 
     <ListView
         android:layout_width="fill_parent"

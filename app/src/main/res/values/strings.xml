@@ -13,6 +13,9 @@
     <string name="title_activity_overview">Overview</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_settings">Settings</string>
-
+    <string name="selectrole">please select role</string>
+    <string-array name="selectrolevalue">
+        <item>Please Select</item>
+    </string-array>
 
 </resources>

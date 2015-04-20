@@ -15,6 +15,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     //name of tables
     public static final String TABLE_JOB = "jobs";
     public static final String TABLE_CONSTANTS = "constants";
+    public static final String TABLE_ROLE = "role";
     //column names in job table
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_DATE = "date";
@@ -22,12 +23,22 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static final String COLUMN_START = "start_time";
     public static final String COLUMN_STOP = "stop_time";
     public static final String COLUMN_JOB_TYPE = "job_type";
-    //column names for job_name_constants table
+    public static final String COLUMN_ROLE_NAME_JOB = "role_name";
 
+    //column names for job_name_constants table
     public static final String COLUMN_JOB_CONSTANT_ID = "id";
     public static final String COLUMN_JOB_CONSTANT_STRING = "constant";
     public static final String COLUMN_JOB_CONSTANT_TYPE = "type";
+    public static final String COLUMN_ROLE_NAME_CONS = "role_name";
+
+    //column names for roles table
+    public static final String COLUMN_NAME = "name";
     //sql stataement for database creation
+    private static  final String CREATE_TABLE_ROLE = "create table "
+            + TABLE_ROLE + "("
+            + COLUMN_NAME + "primary key varchar);";
+
+
     private static final String CREATE_TABLE_JOB = "create table "
             + TABLE_JOB + "("
             //declare columns
@@ -36,12 +47,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             + COLUMN_JOB_NAME + " varchar, "
             + COLUMN_JOB_TYPE + " varchar, "
             + COLUMN_START + " varchar, "
-            + COLUMN_STOP + " varchar);";
+            + COLUMN_STOP + " varchar, "
+            + COLUMN_ROLE_NAME_JOB + " varchar);";
     private static final String  CREATE_TABLE_JOB_NAME_CONSTANTS = "create table "
             + TABLE_CONSTANTS + "("
             + COLUMN_JOB_CONSTANT_ID +" integer primary key autoincrement, "
             + COLUMN_JOB_CONSTANT_STRING + " varchar, "
-            + COLUMN_JOB_CONSTANT_TYPE + " varchar);";
+            + COLUMN_JOB_CONSTANT_TYPE + " varchar, "
+            + COLUMN_ROLE_NAME_CONS + " varchar);";
 
 
     public MySQLiteHelper(Context context){
@@ -50,6 +63,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase database){
         database.execSQL(CREATE_TABLE_JOB);
         database.execSQL(CREATE_TABLE_JOB_NAME_CONSTANTS);
+        database.execSQL(CREATE_TABLE_ROLE);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         Log.w(MySQLiteHelper.class.getName(),
@@ -57,5 +71,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + newVersion + " it will destroy all old data");
         db.execSQL("drop table if exists " + TABLE_JOB);
         db.execSQL("drop table if exists "+ TABLE_CONSTANTS);
+        db.execSQL("drop table if exists "+ TABLE_ROLE);
+        onCreate(db);
     }
 }

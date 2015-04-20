@@ -1,6 +1,7 @@
 package helgamaria.vinnuhelga;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import helgamaria.vinnuhelga.sql.dbFunctions;
@@ -25,10 +27,43 @@ public class settings extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         //adding listeners
+        createRoleListener();
         deleteButtonListener();
         addTheGodDamnListener();
     }
+    private void createRoleListener(){
+        Button button = (Button)findViewById(R.id.addRole);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                final Dialog dialog = new Dialog(settings.this
+                );
+                dialog.setContentView(R.layout.create_role_dialog);
+                dialog.setTitle("Add role:");
 
+                // set the custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.role_name);
+                text.setText("Android custom dialog example!");
+                Button dialogButtonOK = (Button) dialog.findViewById(R.id.roleDialogOk);
+                Button dialogButtonCancel = (Button)dialog.findViewById(R.id.roleDialogCancel);
+
+                dialogButtonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                // if button is clicked, close the custom dialog
+                dialogButtonOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+    });
+    }
     private void deleteButtonListener(){
         //listener to delete all jobs button
         Button button = (Button)findViewById(R.id.deleteAllJobs);
@@ -129,7 +164,7 @@ public class settings extends ActionBarActivity {
                             }
                         }).show();
                     }else{
-                        dbFunc.insertOneConstant(text, number);
+                        dbFunc.insertOneConstant(text, number, "doctor");
                         ed.setText("");
                     }
                 }

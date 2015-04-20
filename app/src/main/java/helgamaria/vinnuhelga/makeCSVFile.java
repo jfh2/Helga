@@ -43,9 +43,10 @@ public class makeCSVFile {
             FileOutputStream f = new FileOutputStream(file);
             PrintWriter pw = new PrintWriter(f);
             String line = "";
-            pw.print("DATE,NAME,TYPE,STARTTIME,STOPTIME,TIME(in seconds)\r\n");
+            pw.print("DATE,WORKER ROLE,JOB NAME,JOB TYPE,STARTTIME,STOPTIME,TIME(in seconds)\r\n");
             for(int i = 0; i < listOfJobsDb.size();i++){
                 DateFormat form = new SimpleDateFormat("hh:mm:ss");
+
                 try{
                     Date start = form.parse(listOfJobsDb.get(i).getStartTime());
                     Date stop = form.parse(listOfJobsDb.get(i).getStopTime());
@@ -53,6 +54,7 @@ public class makeCSVFile {
                     System.out.println(diff/1000);
                     String alltime = Long.toString(diff/1000);
                     line = listOfJobsDb.get(i).getDate() +","+
+                            listOfJobsDb.get(i).getRole_name()+","+
                             listOfJobsDb.get(i).getJobName() +","+
                             listOfJobsDb.get(i).getJobType() +","+
                             listOfJobsDb.get(i).getStartTime() +","+

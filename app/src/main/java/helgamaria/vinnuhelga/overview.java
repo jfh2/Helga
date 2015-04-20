@@ -30,7 +30,7 @@ public class overview extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        //fetching the data from database to my string list
+        //fetching the data from database to a list of job objects
         dbFunc.open();
         List<JobObject> listOfJobsDb = dbFunc.selectAllJobs();
         dbFunc.close();
@@ -39,7 +39,7 @@ public class overview extends ActionBarActivity {
         jobAdapter adapt = new jobAdapter(this, listOfJobsDb);
         lv.setAdapter(adapt);
 
-        Button butt = (Button)findViewById(R.id.excel);
+        Button butt = (Button)findViewById(R.id.txt);
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

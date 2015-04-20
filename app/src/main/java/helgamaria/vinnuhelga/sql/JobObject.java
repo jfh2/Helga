@@ -18,6 +18,7 @@ public class JobObject {
     private String startTime = null;
     private String stopTime = null;
     private String job_type = null;
+    private String role_name = null;
     //get and set id for object
     public int getId(){
         return this.id;
@@ -34,8 +35,17 @@ public class JobObject {
         this.startTime = null;
         this.stopTime = null;
         this.job_type = null;
+        this.role_name = null;
         this.isactive = false;
     }
+
+    public void setRole_name(String role_name){
+        this.role_name = role_name;
+    }
+    public String getRole_name(){
+        return this.role_name;
+    }
+
     //boolean switch to determine if we are counting time
     public void on(){
         this.isactive = true;
@@ -109,7 +119,9 @@ public class JobObject {
 
         if((this.job_name == null|| this.job_type == null)||
            (this.startTime == null || this.stopTime == null)){
-
+            System.out.println("ekki séns");
+        }else if(this.role_name == null){
+            System.out.println("ekki séns1");
         }else{
             dbFunctions dbfunc = new dbFunctions(context);
             dbfunc.open();
@@ -117,7 +129,9 @@ public class JobObject {
                     this.job_name,
                     this.startTime,
                     this.stopTime,
-                    this.job_type);
+                    this.job_type,
+                    this.role_name);
+
             dbfunc.close();
             initJobObj();
         }
