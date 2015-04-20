@@ -39,10 +39,6 @@ public class jobAdapter extends ArrayAdapter<JobObject> {
             TextView type = (TextView)rowView.findViewById(R.id.typeField);
             TextView start = (TextView)rowView.findViewById(R.id.startField);
             TextView stop = (TextView)rowView.findViewById(R.id.stopField);
-            System.out.println("jobadapter start");
-            System.out.println(job.get(position).getJobType());
-            System.out.println(job.get(position).getJobName());
-            System.out.println("jobadapter stop");
             //insert variables
             date.setText(job.get(position).getDate());
             name.setText(job.get(position).getJobName());

@@ -34,11 +34,7 @@ public class overview extends ActionBarActivity {
         dbFunc.open();
         List<JobObject> listOfJobsDb = dbFunc.selectAllJobs();
         dbFunc.close();
-        System.out.println("listofjobs i overview");
-        for(int i = 0; i < listOfJobsDb.size(); i++){
-            System.out.println(listOfJobsDb.get(i).getJobType());
-        }
-        System.out.println("listofjobs i overview lokið");
+
         lv = (ListView)findViewById(R.id.listView);
         jobAdapter adapt = new jobAdapter(this, listOfJobsDb);
         lv.setAdapter(adapt);
