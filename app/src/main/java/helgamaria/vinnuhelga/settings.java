@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import helgamaria.vinnuhelga.sql.dbFunctions;
 
 public class settings extends ActionBarActivity {
@@ -26,11 +28,22 @@ public class settings extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
         //adding listeners
-        createRoleListener();
         deleteButtonListener();
         addTheGodDamnListener();
+        createRoleListener();
+        //get roles and add to spinner
+        getAllRolesToSpinner();
     }
+    private void getAllRolesToSpinner(){
+        List<String> roles = dbFunc.getAllRoles();
+        for(int i = 0; i < roles.size(); i++){
+            System.out.println(roles.get(i));
+        }
+
+    }
+
     private void createRoleListener(){
         Button button = (Button)findViewById(R.id.addRole);
         button.setOnClickListener(new View.OnClickListener(){
@@ -41,21 +54,35 @@ public class settings extends ActionBarActivity {
                 dialog.setTitle("Add role:");
 
                 // set the custom dialog components - text, image and button
-                TextView text = (TextView) dialog.findViewById(R.id.role_name);
-                text.setText("Android custom dialog example!");
-                Button dialogButtonOK = (Button) dialog.findViewById(R.id.roleDialogOk);
+                Button dialogButtonOk = (Button) dialog.findViewById(R.id.roleDialogOk);
                 Button dialogButtonCancel = (Button)dialog.findViewById(R.id.roleDialogCancel);
-
+                //if cancel button is pressed close dialog
                 dialogButtonCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
                 });
-                // if button is clicked, close the custom dialog
-                dialogButtonOK.setOnClickListener(new View.OnClickListener() {
+                // if button is clicked, save the string to database
+                dialogButtonOk.setOnClickListener(new View.OnClickListener() {
+
+                    final EditText ed = (EditText)findViewById(R.id.role_name_to_save);
+                    String save_string = ed.getText().toString();
+
                     @Override
                     public void onClick(View v) {
+
+
+                        try{
+                            if(save_string.equals("") || save_string == null){
+                                Toast.makeText(getApplicationContext(), "Must specify a name", Toast.LENGTH_LONG).show();
+                            }else{
+                                dbFunc.createRole(save_string);
+                                Toast.makeText(getApplicationContext(), "Role created", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch(Exception e){
+                            Toast.makeText(getApplicationContext(), "Couldn't create role", Toast.LENGTH_LONG).show();
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -146,9 +173,6 @@ public class settings extends ActionBarActivity {
     }
 
     private void addConstantListener(final Button button, final EditText ed, final int i, final String number){
-        /*
-        TODO: setja í loopu ef hægt
-         */
 
         //add to number 1
             button.setOnClickListener(new View.OnClickListener() {
@@ -164,8 +188,13 @@ public class settings extends ActionBarActivity {
                             }
                         }).show();
                     }else{
-                        dbFunc.insertOneConstant(text, number, "doctor");
-                        ed.setText("");
+                        try{
+                            dbFunc.insertOneConstant(text, number, "doctor");
+                            Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                            ed.setText("");
+                        }catch(Exception e){
+                            Toast.makeText(getApplicationContext(), "Couldn\'t save, please try again", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             });
