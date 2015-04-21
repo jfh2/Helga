@@ -164,10 +164,11 @@ public class dbFunctions {
     public List<String> getAllRoles(){
         List<String> roles = new ArrayList<String>();
         open();
-        Cursor cur = database.rawQuery("select * from role;", null);
+        Cursor cur = database.rawQuery("select name from role;", null);
         cur.moveToFirst();
         while(!cur.isAfterLast()){
             roles.add(cur.getString(0));
+            cur.moveToNext();
         }
         return roles;
     }

@@ -12,8 +12,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +27,8 @@ import helgamaria.vinnuhelga.sql.dbFunctions;
 
 public class settings extends ActionBarActivity {
     dbFunctions dbFunc = new dbFunctions(this);
+    Spinner spinner = null;
+    String role_from_spinner = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,59 +41,80 @@ public class settings extends ActionBarActivity {
         createRoleListener();
         //get roles and add to spinner
         getAllRolesToSpinner();
+
     }
     private void getAllRolesToSpinner(){
         List<String> roles = dbFunc.getAllRoles();
         for(int i = 0; i < roles.size(); i++){
             System.out.println(roles.get(i));
         }
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, roles);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        //listen to changes in spinner
+        spinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        String Text = spinner.getSelectedItem().toString();
+                        role_from_spinner = Text;
+                        System.out.println(role_from_spinner);
+
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
     }
 
     private void createRoleListener(){
-        Button button = (Button)findViewById(R.id.addRole);
+
+         Button button = (Button)findViewById(R.id.addRole);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                final Dialog dialog = new Dialog(settings.this
-                );
-                dialog.setContentView(R.layout.create_role_dialog);
-                dialog.setTitle("Add role:");
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(settings.this);
+                alertDialog.setTitle("Add Role");
 
-                // set the custom dialog components - text, image and button
-                Button dialogButtonOk = (Button) dialog.findViewById(R.id.roleDialogOk);
-                Button dialogButtonCancel = (Button)dialog.findViewById(R.id.roleDialogCancel);
-                //if cancel button is pressed close dialog
-                dialogButtonCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                // if button is clicked, save the string to database
-                dialogButtonOk.setOnClickListener(new View.OnClickListener() {
-
-                    final EditText ed = (EditText)findViewById(R.id.role_name_to_save);
-                    String save_string = ed.getText().toString();
-
-                    @Override
-                    public void onClick(View v) {
+                final EditText input = new EditText(settings.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialog.setView(input);
 
 
-                        try{
-                            if(save_string.equals("") || save_string == null){
-                                Toast.makeText(getApplicationContext(), "Must specify a name", Toast.LENGTH_LONG).show();
-                            }else{
-                                dbFunc.createRole(save_string);
-                                Toast.makeText(getApplicationContext(), "Role created", Toast.LENGTH_SHORT).show();
+                alertDialog.setPositiveButton("Save",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                String save_string = input.getText().toString();
+                                try{
+                                    if(save_string.equals("") || save_string == null){
+                                        Toast.makeText(getApplicationContext(), "Must specify a name", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        //System.out.println(save_string);
+                                        dbFunc.createRole(save_string);
+                                        Toast.makeText(getApplicationContext(), "Role created", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }catch(Exception e){
+                                    Toast.makeText(getApplicationContext(), "Couldn't create role", Toast.LENGTH_LONG).show();
+                                }
+                                recreate();
                             }
-                        }catch(Exception e){
-                            Toast.makeText(getApplicationContext(), "Couldn't create role", Toast.LENGTH_LONG).show();
-                        }
-                        dialog.dismiss();
-                    }
-                });
+                        });
 
-                dialog.show();
+                alertDialog.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
             }
     });
     }
@@ -189,7 +216,7 @@ public class settings extends ActionBarActivity {
                         }).show();
                     }else{
                         try{
-                            dbFunc.insertOneConstant(text, number, "doctor");
+                            dbFunc.insertOneConstant(text, number, role_from_spinner);
                             Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
                             ed.setText("");
                         }catch(Exception e){
@@ -234,5 +261,18 @@ public class settings extends ActionBarActivity {
             finish();
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public void recreate()
+    {
+        if (android.os.Build.VERSION.SDK_INT >= 11)
+        {
+            super.recreate();
+        }
+        else
+        {
+            startActivity(getIntent());
+            finish();
+        }
     }
 }

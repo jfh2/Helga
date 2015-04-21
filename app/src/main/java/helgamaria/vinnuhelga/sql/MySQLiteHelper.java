@@ -36,7 +36,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     //sql stataement for database creation
     private static  final String CREATE_TABLE_ROLE = "create table "
             + TABLE_ROLE + "("
-            + COLUMN_NAME + "primary key varchar);";
+            + COLUMN_NAME + " varchar,"
+            + " PRIMARY KEY ("+ COLUMN_NAME + "));";
 
 
     private static final String CREATE_TABLE_JOB = "create table "
