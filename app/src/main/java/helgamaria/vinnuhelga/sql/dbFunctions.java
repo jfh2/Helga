@@ -117,12 +117,12 @@ public class dbFunctions {
         close();
     }
     //methods for constant table
-    public List<List<String>> selectAllConstants(){
+    public List<List<String>> selectAllConstants(String role){
         open();
         String[] columns = {"constant", "type"};
         List<List<String>> lists = new ArrayList<List<String>>();
 
-        Cursor cur = database.rawQuery("select constant, type from constants;", null);
+        Cursor cur = database.rawQuery("select constant, type from constants where role_name = \'" + role + "\';", null);
         cur.moveToFirst();
         while(!cur.isAfterLast()){
             List<String> list = new ArrayList<String>();
@@ -138,7 +138,7 @@ public class dbFunctions {
     public void deleteOneConstant(String constant, String role_name){
         try{
             open();
-            database.delete(MySQLiteHelper.TABLE_CONSTANTS,"constant = \'" + constant +"\'" + " and role_name = "+ "\'doctor\'", null);
+            database.delete(MySQLiteHelper.TABLE_CONSTANTS,"constant = \'" + constant +"\'" + " and role_name = "+ "\'"+role_name+"\'", null);
             close();
         }catch(Exception e){
             System.out.println("neinei");

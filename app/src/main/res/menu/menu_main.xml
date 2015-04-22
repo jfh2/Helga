@@ -5,8 +5,8 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_overview" android:title="Overview"
         android:orderInCategory="100"  app:showAsAction="never"/>
-    <item android:id="@+id/lala"
-          android:title ="haha"
+    <item android:id="@+id/switch_role"
+          android:title ="switch_role"
           android:icon="@drawable/change"
           app:showAsAction="ifRoom"/>
 </menu>

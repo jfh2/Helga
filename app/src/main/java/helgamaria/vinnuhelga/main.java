@@ -3,6 +3,7 @@ package helgamaria.vinnuhelga;
 import helgamaria.vinnuhelga.sql.JobObject;
 import helgamaria.vinnuhelga.sql.dbFunctions;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -44,6 +45,7 @@ public class main extends ActionBarActivity {
     List<String> list6 = new ArrayList<String>();
     final String colorgreen = "#00FF00";
     final String colorwhite = "#FFFFFF";
+    String role_used = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -97,7 +99,23 @@ public class main extends ActionBarActivity {
         lv5.setAdapter(ad5);
         lv6.setAdapter(ad6);
 
-        prepareJobLists();
+
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            if (extra.containsKey("role")) {
+                String isNew = extra.getString("role");
+                System.out.println(isNew);
+                role_used = isNew;
+                prepareJobLists(isNew);
+
+                // TODO: Do something with the value of isNew.
+            }
+        }else{
+            prepareJobLists("");
+        }
+        //String j = (String)extra.get("role");
+        //System.out.println(j);
+
         setListeners();
         setLongclickListeners();
     }
@@ -107,14 +125,19 @@ public class main extends ActionBarActivity {
             public boolean onItemLongClick(AdapterView<?> arg0, View v,
                                            int index, long arg3) {
                 String str= lv1.getItemAtPosition(index).toString();
-                dbFunc.deleteOneConstant(str, "");
+                dbFunc.deleteOneConstant(str, role_used);
                 recreate();
                 return true;
             }
         });
     }
-    private void prepareJobLists(){
-        List<List<String>> initlist = dbFunc.selectAllConstants();
+    private void prepareJobLists(String what_role){
+        setTitle("Working as: ...");
+        if(what_role.equals("")){
+            return;
+        }
+        setTitle("Working as: "+what_role);
+        List<List<String>> initlist = dbFunc.selectAllConstants(what_role);
         List<String> templist;
 
         if(initlist.size() == 0) return;
@@ -176,7 +199,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    obj.setRole_name("doctor");
+                    obj.setRole_name(role_used);
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -218,7 +241,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    obj.setRole_name("doctor");
+                    obj.setRole_name(role_used);
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -259,7 +282,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    obj.setRole_name("doctor");
+                    obj.setRole_name(role_used);
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -300,7 +323,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    obj.setRole_name("doctor");
+                    obj.setRole_name(role_used);
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -341,7 +364,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    obj.setRole_name("doctor");
+                    obj.setRole_name(role_used);
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -382,7 +405,7 @@ public class main extends ActionBarActivity {
                 }else{
                     //hér ef það er on setjum það off
                     obj.setStopTime(null);
-                    obj.setRole_name("doctor");
+                    obj.setRole_name(role_used);
                     view.setBackgroundColor(Color.parseColor(colorwhite));
                     obj.saveToDb(getApplicationContext());
                 }
@@ -448,6 +471,26 @@ public class main extends ActionBarActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
 
+        }
+        if(id == R.id.switch_role){
+            List<String> roles = dbFunc.getAllRoles();
+            final CharSequence[] items = roles.toArray(new CharSequence[roles.size()]);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do something with the selection
+                    CharSequence string = items[which];
+                    String string1 = string.toString();
+                    System.out.println(string);
+                    Intent i = getIntent();
+                    i.putExtra("role", string1);
+                    finish();
+                    startActivity(i);
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
         return super.onOptionsItemSelected(item);
     }
