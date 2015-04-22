@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,6 @@ public class main extends ActionBarActivity {
         if (extra != null) {
             if (extra.containsKey("role")) {
                 String isNew = extra.getString("role");
-                System.out.println(isNew);
                 role_used = isNew;
                 prepareJobLists(isNew);
 
@@ -124,9 +124,89 @@ public class main extends ActionBarActivity {
 
             public boolean onItemLongClick(AdapterView<?> arg0, View v,
                                            int index, long arg3) {
+
                 String str= lv1.getItemAtPosition(index).toString();
-                dbFunc.deleteOneConstant(str, role_used);
-                recreate();
+                try{
+                    dbFunc.deleteOneConstant(str, role_used, "1");
+                    recreate();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        lv2.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+
+                String str= lv2.getItemAtPosition(index).toString();
+                try{
+                    dbFunc.deleteOneConstant(str, role_used, "2");
+                    recreate();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        lv3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+
+                String str= lv3.getItemAtPosition(index).toString();
+                try{
+                    dbFunc.deleteOneConstant(str, role_used, "3");
+                    recreate();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        lv4.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+
+                String str= lv4.getItemAtPosition(index).toString();
+                try{
+                    dbFunc.deleteOneConstant(str, role_used, "4");
+                    recreate();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        lv5.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+
+                String str= lv5.getItemAtPosition(index).toString();
+                try{
+                    dbFunc.deleteOneConstant(str, role_used, "5");
+                    recreate();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        lv6.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View v,
+                                           int index, long arg3) {
+
+                String str= lv6.getItemAtPosition(index).toString();
+                try{
+                    dbFunc.deleteOneConstant(str, role_used, "6");
+                    recreate();
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
         });

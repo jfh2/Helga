@@ -146,12 +146,14 @@ public class settings extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(settings.this)
-                        .setMessage("Are you sure you want to delete all defined job names?")
+                        .setMessage("Are you sure you want to delete given role?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which){
                                 try{
-                                    dbFunc.deleteAllConstants();
+                                    String Text = spinner.getSelectedItem().toString();
+                                    dbFunc.deleteAllConstants(Text);
                                     Toast.makeText(getApplicationContext(), "All defined job names deleted successfully", Toast.LENGTH_LONG).show();
+                                    recreate();
                                 }catch(Exception e){
                                     Toast.makeText(getApplicationContext(), "Failed to delete, please try again", Toast.LENGTH_LONG).show();
                                 }

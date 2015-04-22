@@ -226,14 +226,16 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Delete all jobs from database"
+            android:text="Delete all existing jobs"
             android:id="@+id/deleteAllJobs"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:color="@color/red"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Delete all constants from database"
+            android:text="Delete chosen role and it's job names"
             android:id="@+id/deleteAllConstants"
-            android:layout_column="1" />
+            android:layout_column="1"
+            android:color="@color/red"/>
 
 </TableLayout>

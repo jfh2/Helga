@@ -51,7 +51,6 @@ public class makeCSVFile {
                     Date start = form.parse(listOfJobsDb.get(i).getStartTime());
                     Date stop = form.parse(listOfJobsDb.get(i).getStopTime());
                     Long diff = stop.getTime() - start.getTime();
-                    System.out.println(diff/1000);
                     String alltime = Long.toString(diff/1000);
                     line = listOfJobsDb.get(i).getDate() +","+
                             listOfJobsDb.get(i).getRole_name()+","+

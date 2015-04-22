@@ -55,7 +55,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             + COLUMN_JOB_CONSTANT_ID +" integer primary key autoincrement, "
             + COLUMN_JOB_CONSTANT_STRING + " varchar, "
             + COLUMN_JOB_CONSTANT_TYPE + " varchar, "
-            + COLUMN_ROLE_NAME_CONS + " varchar);";
+                + COLUMN_ROLE_NAME_CONS + " varchar);";
 
 
     public MySQLiteHelper(Context context){

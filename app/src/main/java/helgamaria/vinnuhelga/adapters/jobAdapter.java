@@ -35,6 +35,7 @@ public class jobAdapter extends ArrayAdapter<JobObject> {
         }
             //initialize the fields
             TextView date = (TextView)rowView.findViewById(R.id.dateField);
+            TextView role = (TextView)rowView.findViewById(R.id.roleField);
             TextView name = (TextView)rowView.findViewById(R.id.nameField);
             TextView type = (TextView)rowView.findViewById(R.id.typeField);
             TextView start = (TextView)rowView.findViewById(R.id.startField);
@@ -45,6 +46,7 @@ public class jobAdapter extends ArrayAdapter<JobObject> {
             type.setText(job.get(position).getJobType());
             stop.setText(job.get(position).getStopTime());
             start.setText(job.get(position).getStartTime());
+            role.setText(job.get(position).getRole_name());
 
 
         return rowView;

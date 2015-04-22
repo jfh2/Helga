@@ -40,8 +40,7 @@ public class dbFunctions {
                           String stop_time,
                           String job_type,
                           String role_name){
-        System.out.println("i db");
-        System.out.println(role_name);
+
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_DATE, date);
         values.put(MySQLiteHelper.COLUMN_JOB_NAME, job_name);
@@ -108,10 +107,10 @@ public class dbFunctions {
         database.execSQL(query);
         close();
     }
-    public void deleteAllConstants(){
+    public void deleteAllConstants(String role_name){
         open();
-        String consquery = "delete from constants";
-        String rolequery = "delete from role";
+        String consquery = "delete from constants where role_name = \'" + role_name + "\'";
+        String rolequery = "delete from role where name = \'"+ role_name + "\'";
         database.execSQL(rolequery);
         database.execSQL(consquery);
         close();
@@ -135,13 +134,13 @@ public class dbFunctions {
         close();
         return lists;
     }
-    public void deleteOneConstant(String constant, String role_name){
+    public void deleteOneConstant(String constant, String role_name, String type){
         try{
             open();
-            database.delete(MySQLiteHelper.TABLE_CONSTANTS,"constant = \'" + constant +"\'" + " and role_name = "+ "\'"+role_name+"\'", null);
+            database.delete(MySQLiteHelper.TABLE_CONSTANTS,"constant = \'" + constant +"\'" + " and role_name = "+ "\'"+role_name+"\'" + "and type = \'"+ type + "\'", null);
             close();
         }catch(Exception e){
-            System.out.println("neinei");
+
         }
     }
     public void insertOneConstant(String cons, String constype, String role_name){
