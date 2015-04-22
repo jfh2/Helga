@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class main extends ActionBarActivity {
-    PowerManager pm;
-    PowerManager.WakeLock wl;
+    //PowerManager pm;
+    //PowerManager.WakeLock wl;
     dbFunctions dbFunc = new dbFunctions(this);
     private ListView lv1,lv2,lv3,lv4,lv5,lv6;
     //lists with jobobjects
@@ -51,9 +51,9 @@ public class main extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pm = (PowerManager) getSystemService(this.POWER_SERVICE);
-        wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "myTag");
-        wl.acquire();
+        //pm = (PowerManager) getSystemService(this.POWER_SERVICE);
+        //wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "myTag");
+        //wl.acquire();
 
 
         //finding the listviews
@@ -434,9 +434,9 @@ public class main extends ActionBarActivity {
                     .setMessage("All running jobs will be lost")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            if(wl.isHeld()){
-                                wl.release();
-                            }
+                            //if(wl.isHeld()){
+                            //    wl.release();
+                            //}
                             Intent intent = new Intent(getApplicationContext(), settings.class);
                             startActivity(intent);
                         }
@@ -456,9 +456,9 @@ public class main extends ActionBarActivity {
                     .setMessage("All running jobs will be lost")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            if(wl.isHeld()){
-                                wl.release();
-                            }
+                            //if(wl.isHeld()){
+                            //    wl.release();
+                            //}
                             Intent intent = new Intent(getApplicationContext(), overview.class);
                             startActivity(intent);
                         }
